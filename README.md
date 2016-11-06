@@ -1,2 +1,2 @@
-# velespi
-Cyclist and cycle-friendly business network
+# Explore with locals
+A network that connects travelers with locals
