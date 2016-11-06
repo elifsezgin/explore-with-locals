@@ -19,7 +19,7 @@ from django.conf import settings
 from django.views.static import serve
 from places.views import (
     index, detail, new_place, new_media, new_review,
-    like_place
+    like_place, remove_media, remove_review
 )
 from profiles.views import register, login, logout
 
@@ -31,7 +31,9 @@ urlpatterns = [
     url(r'^logout$', logout, name="logout"),
     url(r'^places/(?P<id>\d+)$', detail, name='place_detail'),
     url(r'^places/(?P<place_id>\d+)/new-media$', new_media, name='new_media'),
+    url(r'^places/(?P<place_id>\d+)/remove-media/(?P<media_id>\d+)$', remove_media, name='remove_media'),
     url(r'^places/(?P<place_id>\d+)/new-review$', new_review, name='new_review'),
+    url(r'^places/(?P<place_id>\d+)/remove-review/(?P<review_id>\d+)$', remove_review, name='remove_review'),
     url(r'^places/(?P<place_id>\d+)/like$', like_place, name='like_place'),
     url(r'^new-place$', new_place, name="new_place"),
 ]

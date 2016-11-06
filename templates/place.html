@@ -26,12 +26,14 @@
                 {{ review.user.username }}
             </small>
         </blockquote>
+        <a href="{% url "remove_review" place.id review.id %}">Delete review</a>
         {% endfor %}
     {% endif %}
 
     <h3>Photos</h3>
     {% for media in place.media_set.all %}
-        <img src="{{ media }}">
+        <img src="{{ media }}" width="1000px">
+        <a href="{% url "remove_media" place.id media.id %}">Delete photo</a>
     {% empty %}
         <p>
             There is no photos for this place.
