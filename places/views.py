@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from places.models import Place
+from places.models import Place, Media, Review
 from places.forms import PlaceCreationForm, MediaCreationForm, ReviewCreationForm
 
 
@@ -73,6 +73,16 @@ def new_media(request, place_id):
     )
 
 @login_required(login_url='login')
+def remove_media(request, place_id, media_id):
+    media = get_object_or_404(Media, id=media_id)
+    place = get_object_or_404(Place, id=place_id)
+
+    if request.method == "GET":
+        media.delete()
+
+    return redirect(place.get_absolute_url())
+
+@login_required(login_url='login')
 def new_review(request, place_id):
     place = get_object_or_404(Place, id=place_id)
     form = ReviewCreationForm()
@@ -93,6 +103,16 @@ def new_review(request, place_id):
             'form': form,
         }
     )
+
+@login_required(login_url='login')
+def remove_review(request, place_id, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    place = get_object_or_404(Place, id=place_id)
+
+    if request.method == "GET":
+        review.delete()
+
+    return redirect(place.get_absolute_url())
 
 @login_required(login_url='login')
 def like_place(request, place_id):
